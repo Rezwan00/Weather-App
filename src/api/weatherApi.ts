@@ -12,6 +12,7 @@ export type WeatherResponse = {
     time: string[];
     temperature_2m_max: number[];
     temperature_2m_min: number[];
+     weather_code: number[];
   };
 };
 
@@ -23,7 +24,7 @@ export async function fetchWeather(
     latitude: String(city.latitude),
     longitude: String(city.longitude),
     current: "temperature_2m,wind_speed_10m,weather_code",
-    daily: "temperature_2m_max,temperature_2m_min",
+    daily: "temperature_2m_max,temperature_2m_min,weather_code",
     timezone: "auto",
     temperature_unit: temperatureUnit,
   });

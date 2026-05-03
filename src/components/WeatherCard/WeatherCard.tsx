@@ -1,6 +1,6 @@
 import type { City } from "../../data/cities";
 import type { TemperatureUnit } from "../../api/weatherApi";
-import { getWeatherDescription } from "../../utils/weatherCode"
+import { getWeatherInfo } from "../../utils/weatherCode"
 import styles from "./WeatherCard.module.scss";
 
 type Props = {
@@ -14,14 +14,22 @@ type Props = {
 };
 
 export function WeatherCard({ city, weather, unit }: Props) {
+
+  const info = getWeatherInfo(weather.weather_code)
   return (
     <section className={styles.card}>
       <h2>{city.name}</h2>
-      <p className={styles.temperature}>
-        {Math.round(weather.temperature_2m)}°{unit === "celsius" ? "C" : "F"}
-      </p>
-      <p>Wind: {weather.wind_speed_10m} km/h</p>
-      <p>{getWeatherDescription(weather.weather_code)}</p>
+
+<div style={{ fontSize: "40px" }}>
+  {info.icon}
+</div>
+
+<p className={styles.temperature}>
+  {Math.round(weather.temperature_2m)}°{unit === "celsius" ? "C" : "F"}
+</p>
+
+<p>{info.label}</p>
+<p>Wind: {weather.wind_speed_10m} km/h</p>
     </section>
   );
 }
