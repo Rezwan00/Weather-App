@@ -1,4 +1,4 @@
-# Coresearch Weather App
+# Weather App
 
 A React + TypeScript weather dashboard using the Open-Meteo API.
 
