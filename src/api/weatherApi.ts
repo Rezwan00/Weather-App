@@ -7,12 +7,13 @@ export type WeatherResponse = {
     temperature_2m: number;
     wind_speed_10m: number;
     weather_code: number;
+    is_day: number;
   };
   daily: {
     time: string[];
     temperature_2m_max: number[];
     temperature_2m_min: number[];
-     weather_code: number[];
+    weather_code: number[];
   };
 };
 
@@ -23,7 +24,7 @@ export async function fetchWeather(
   const params = new URLSearchParams({
     latitude: String(city.latitude),
     longitude: String(city.longitude),
-    current: "temperature_2m,wind_speed_10m,weather_code",
+    current: "temperature_2m,wind_speed_10m,weather_code,is_day",
     daily: "temperature_2m_max,temperature_2m_min,weather_code",
     timezone: "auto",
     temperature_unit: temperatureUnit,
