@@ -34,3 +34,17 @@
 .error {
   color: #b00020;
 }
+.weatherOverview {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 24px;
+  align-items: stretch;
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 768px) {
+  .weatherOverview {
+    grid-template-columns: 1fr;
+  }
+}

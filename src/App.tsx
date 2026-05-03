@@ -6,6 +6,7 @@ import { CitySearch } from "./components/CitySearch/CitySearch";
 import { WeatherCard } from "./components/WeatherCard/WeatherCard";
 import { ForecastList } from "./components/ForecastList/ForecastList";
 import styles from "./App.module.scss";
+import { TemperatureChart } from "./components/TemperatureChart/TemperatureChart";
 
 export default function App() {
   const [selectedCity, setSelectedCity] = useState(cities[0]);
@@ -48,8 +49,12 @@ export default function App() {
 
       {data && (
         <>
-          <WeatherCard city={selectedCity} weather={data.current} unit={unit} />
-          <ForecastList daily={data.daily} unit={unit} />
+         <div className={styles.weatherOverview}>
+  <WeatherCard city={selectedCity} weather={data.current} unit={unit} />
+  <TemperatureChart daily={data.daily} unit={unit} />
+</div>
+
+<ForecastList daily={data.daily} unit={unit} />
         </>
       )}
     </main>
