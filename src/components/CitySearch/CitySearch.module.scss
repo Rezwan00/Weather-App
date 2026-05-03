@@ -1,0 +1,10 @@
+.wrapper {
+  display: grid;
+  gap: 8px;
+  max-width: 320px;
+
+  select {
+    padding: 10px;
+    border-radius: 8px;
+  }
+}

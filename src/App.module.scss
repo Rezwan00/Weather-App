@@ -1,0 +1,36 @@
+.page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 32px 16px;
+}
+
+.hero {
+  margin-bottom: 24px;
+
+  h1 {
+    font-size: 40px;
+    margin-bottom: 8px;
+  }
+}
+
+.toggle {
+  display: flex;
+  gap: 8px;
+  margin: 20px 0;
+
+  button {
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+  }
+
+  button:disabled {
+    font-weight: 700;
+    cursor: default;
+  }
+}
+
+.error {
+  color: #b00020;
+}
