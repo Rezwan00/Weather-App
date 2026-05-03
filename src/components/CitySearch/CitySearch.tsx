@@ -8,23 +8,37 @@ type Props = {
 };
 
 export function CitySearch({ cities, selectedCity, onCityChange }: Props) {
+  const handleChange = (value: string) => {
+    const city = cities.find(
+      (city) =>
+        `${city.name}, ${city.country}`.toLowerCase() === value.toLowerCase()
+    );
+
+    if (city) {
+      onCityChange(city);
+    }
+  };
+
   return (
     <div className={styles.wrapper}>
-      <label htmlFor="city">Choose city</label>
-      <select
+      <label htmlFor="city">Search city</label>
+
+      <input
         id="city"
-        value={selectedCity.name}
-        onChange={(event) => {
-          const city = cities.find((c) => c.name === event.target.value);
-          if (city) onCityChange(city);
-        }}
-      >
+        list="city-options"
+        defaultValue={`${selectedCity.name}, ${selectedCity.country}`}
+        onChange={(event) => handleChange(event.target.value)}
+        placeholder="Type or choose a city"
+      />
+
+      <datalist id="city-options">
         {cities.map((city) => (
-          <option key={city.name} value={city.name}>
-            {city.name}, {city.country}
-          </option>
+          <option
+            key={city.name}
+            value={`${city.name}, ${city.country}`}
+          />
         ))}
-      </select>
+      </datalist>
     </div>
   );
 }
