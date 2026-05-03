@@ -1,5 +1,6 @@
 import type { City } from "../../data/cities";
 import type { TemperatureUnit } from "../../api/weatherApi";
+import { getWeatherDescription } from "../../utils/weatherCode"
 import styles from "./WeatherCard.module.scss";
 
 type Props = {
@@ -20,7 +21,7 @@ export function WeatherCard({ city, weather, unit }: Props) {
         {Math.round(weather.temperature_2m)}°{unit === "celsius" ? "C" : "F"}
       </p>
       <p>Wind: {weather.wind_speed_10m} km/h</p>
-      <p>Weather code: {weather.weather_code}</p>
+      <p>{getWeatherDescription(weather.weather_code)}</p>
     </section>
   );
 }
