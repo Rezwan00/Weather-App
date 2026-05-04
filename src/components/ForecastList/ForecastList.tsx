@@ -13,45 +13,43 @@ type Props = {
 };
 
 export function ForecastList({ daily, unit }: Props) {
+  const unitLabel = unit === "celsius" ? "°C" : "°F";
+
   return (
-    <section className={styles.grid}>
-      {daily.time.map((date, index) => {
-        const weatherInfo = getWeatherInfo(daily.weather_code[index]);
+    <section className={styles.section}>
+      <p className={styles.title}>7-Day Forecast</p>
+      <div className={styles.grid}>
+        {daily.time.map((date, index) => {
+          const weatherInfo = getWeatherInfo(daily.weather_code[index]);
+          const weekday = new Date(date).toLocaleDateString(undefined, { weekday: "short" });
+          const formattedDate = new Date(date).toLocaleDateString(undefined, {
+            day: "2-digit",
+            month: "2-digit",
+          });
 
-        const weekday = new Date(date).toLocaleDateString(undefined, {
-          weekday: "short",
-        });
+          return (
+            <article key={date} className={styles.day}>
+              <div className={styles.header}>
+                <span className={styles.weekday}>{weekday}</span>
+                <span className={styles.date}>{formattedDate}</span>
+              </div>
 
-        const formattedDate = new Date(date).toLocaleDateString(undefined, {
-          day: "2-digit",
-          month: "2-digit",
-        });
+              <div className={styles.icon}>{weatherInfo.icon}</div>
 
-        return (
-          <article key={date} className={styles.day}>
-            <div className={styles.header}>
-              <span className={styles.weekday}>{weekday}</span>
-              <span className={styles.date}>{formattedDate}</span>
-            </div>
+              <span className={styles.label}>{weatherInfo.label}</span>
 
-            <div className={styles.temps}>
-              <span className={styles.max}>
-                {Math.round(daily.temperature_2m_max[index])}°
-                {unit === "celsius" ? "C" : "F"}
-              </span>
-
-              <span className={styles.min}>
-                {Math.round(daily.temperature_2m_min[index])}°
-                {unit === "celsius" ? "C" : "F"}
-              </span>
-            </div>
-
-            <div className={styles.icon}>{weatherInfo.icon}</div>
-
-            <p>{weatherInfo.label}</p>
-          </article>
-        );
-      })}
+              <div className={styles.temps}>
+                <span className={styles.max}>
+                  {Math.round(daily.temperature_2m_max[index])}{unitLabel}
+                </span>
+                <span className={styles.min}>
+                  {Math.round(daily.temperature_2m_min[index])}{unitLabel}
+                </span>
+              </div>
+            </article>
+          );
+        })}
+      </div>
     </section>
   );
 }

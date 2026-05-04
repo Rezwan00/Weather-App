@@ -3,12 +3,11 @@ import { useQuery } from "@tanstack/react-query";
 import { cities } from "./data/cities";
 import { fetchWeather, type TemperatureUnit } from "./api/weatherApi";
 import { CitySearch } from "./components/CitySearch/CitySearch";
-import { WeatherCard } from "./components/WeatherCard/WeatherCard";
 import { ForecastList } from "./components/ForecastList/ForecastList";
-import { TemperatureChart } from "./components/TemperatureChart/TemperatureChart";
 import { WeatherBackground } from "./components/WeatherBackground/WeatherBackground";
 import { getWeatherTheme } from "./utils/weatherBackground";
 import styles from "./App.module.scss";
+import { WeatherOverview } from "./components/WeatherOverview/WeatherOverview";
 
 export default function App() {
   const [selectedCity, setSelectedCity] = useState(cities[0]);
@@ -52,14 +51,16 @@ return (
       )}
 
       {data && (
-        <>
-          <div className={styles.weatherOverview}>
-            <WeatherCard city={selectedCity} weather={data.current} unit={unit} />
-            <TemperatureChart daily={data.daily} unit={unit} />
-          </div>
-          <ForecastList daily={data.daily} unit={unit} />
-        </>
-      )}
+  <>
+    <WeatherOverview
+      city={selectedCity}
+      weather={data.current}
+      daily={data.daily}
+      unit={unit}
+    />
+    <ForecastList daily={data.daily} unit={unit} />
+  </>
+)}
     </main>
   </WeatherBackground>
 );
