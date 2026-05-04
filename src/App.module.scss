@@ -1,49 +1,118 @@
 .page {
   max-width: 1358px;
   margin: 0 auto;
-  padding: 32px 16px;
+  padding: 0 16px 32px;
 }
 
-.hero {
-  margin-bottom: 24px;
+// ── Header ───────────────────────────────────────────────────────────────────
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 20px 32px;
+  margin-bottom: 32px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex-shrink: 0;
 
   h1 {
-    font-size: 40px;
-    margin-bottom: 8px;
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0;
+    letter-spacing: -0.3px;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
+    white-space: nowrap;
+  }
+
+  span {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.7);
+    letter-spacing: 0.3px;
   }
 }
 
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+// ── Unit toggle ───────────────────────────────────────────────────────────────
 .toggle {
   display: flex;
-  gap: 8px;
-  margin: 20px 0;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 3px;
+  gap: 2px;
+  flex-shrink: 0;
 
   button {
-    padding: 8px 14px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
+    padding: 6px 14px;
+    border-radius: 7px;
+    border: none;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    font-weight: 500;
     cursor: pointer;
-  }
+    transition: background 0.2s, color 0.2s;
 
-  button:disabled {
-    font-weight: 700;
-    cursor: default;
+    &:hover:not(:disabled) {
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+    }
+
+    &:disabled {
+      background: rgba(255, 255, 255, 0.25);
+      color: #fff;
+      cursor: default;
+    }
   }
 }
 
+// ── Content ───────────────────────────────────────────────────────────────────
 .error {
-  color: #b00020;
+  color: #ffb3b3;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
 }
+
 .weatherOverview {
   display: grid;
   grid-template-columns: 320px 1fr;
   gap: 24px;
   align-items: stretch;
-  margin-top: 24px;
   margin-bottom: 24px;
 }
 
+// ── Responsive ────────────────────────────────────────────────────────────────
 @media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px 20px;
+    gap: 16px;
+  }
+
+  .controls {
+    width: 100%;
+    justify-content: space-between;
+  }
+
   .weatherOverview {
     grid-template-columns: 1fr;
   }

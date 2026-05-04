@@ -24,47 +24,43 @@ const theme = getWeatherTheme(
   (data?.current?.is_day ?? 1) === 1
 );
 
-  return (
-    <WeatherBackground theme={theme}>
-      <main className={styles.page}>
-        <section className={styles.hero}>
-          <h1>Weather Forecast</h1>
-          <p>Search weather by city and view the 7-day forecast.</p>
-        </section>
-
+return (
+  <WeatherBackground theme={theme}>
+    <header className={styles.header}>
+      <div className={styles.brand}>
+        <h1>Weather Forecast</h1>
+        <span>Powered by Open-Meteo</span>
+      </div>
+      <div className={styles.controls}>
         <CitySearch
           cities={cities}
           selectedCity={selectedCity}
           onCityChange={setSelectedCity}
         />
-
         <div className={styles.toggle}>
-          <button onClick={() => setUnit("celsius")} disabled={unit === "celsius"}>
-            °C
-          </button>
-          <button onClick={() => setUnit("fahrenheit")} disabled={unit === "fahrenheit"}>
-            °F
-          </button>
+          <button onClick={() => setUnit("celsius")} disabled={unit === "celsius"}>°C</button>
+          <button onClick={() => setUnit("fahrenheit")} disabled={unit === "fahrenheit"}>°F</button>
         </div>
+      </div>
+    </header>
 
-        {isLoading && <p>Loading weather...</p>}
+    <main className={styles.page}>
+      {isLoading && <p>Loading weather...</p>}
 
-        {isError && (
-          <p className={styles.error}>
-            {(error as Error).message}
-          </p>
-        )}
+      {isError && (
+        <p className={styles.error}>{(error as Error).message}</p>
+      )}
 
-        {data && (
-          <>
-            <div className={styles.weatherOverview}>
-              <WeatherCard city={selectedCity} weather={data.current} unit={unit} />
-              <TemperatureChart daily={data.daily} unit={unit} />
-            </div>
-            <ForecastList daily={data.daily} unit={unit} />
-          </>
-        )}
-      </main>
-    </WeatherBackground>
-  );
+      {data && (
+        <>
+          <div className={styles.weatherOverview}>
+            <WeatherCard city={selectedCity} weather={data.current} unit={unit} />
+            <TemperatureChart daily={data.daily} unit={unit} />
+          </div>
+          <ForecastList daily={data.daily} unit={unit} />
+        </>
+      )}
+    </main>
+  </WeatherBackground>
+);
 }
